@@ -1,0 +1,45 @@
+@startuml OnlineTradeSystem_Context
+!include ../_c4/C4_Component.puml
+
+title System Component Diagram: "Система Онлайн-торговли"
+
+' Внешние акторы и системы
+Person(Customer, "Покупатель", "")
+
+Enterprise_Boundary(online-trading-system, "Online Trading System") {
+    System_Ext(PaymentGateway, "Платежный шлюз", "")
+    System_Ext(NotificationService, "Сервис уведомлений", "")
+    System_Ext(SupplierSystem, "Система поставщиков", "")
+    System_Ext(AnalyticsService, "Аналитическая платформа", "")
+}
+
+
+
+' Граница системы
+System_Boundary(online-trading-system, "Online Trading System") {
+    System(ots, "Система для онлайн-торговли", "Предоставляет услуги")
+
+    Container(CatalogService, "Сервис Каталога", "Управление каталогом товаров")
+    Container(OrderService, "Сервис Заказов", "Обработка заказов")
+    Container(PaymentService, "Сервис Платежей", "Обработка платежей")
+    Container(InternalNotificationService, "Сервис Уведомлений", "Отправка внутренних уведомлений")
+    Container(InventoryService, "Сервис Складского Учета", "Управление запасами")
+    Container(UserService, "Сервис Пользователей", "Регистрация и управление пользователями")
+}
+
+' Взаимодействия пользователей
+Rel(Customer, UserService, "Регистрация / Аутентификация")
+Rel(Customer, CatalogService, "Просмотр товаров")
+Rel(Customer, OrderService, "Создание заказа")
+
+' Взаимодействия между компонентами системы
+Rel(OrderService, PaymentService, "Инициация платежа")
+Rel(OrderService, InventoryService, "Резервирование товара")
+
+' Взаимодействия с внешними системами
+Rel(PaymentService, PaymentGateway, "Платежи и проверки")
+Rel(InternalNotificationService, NotificationService, "Email/SMS уведомления")
+Rel(InventoryService, SupplierSystem, "Обновление остатков")
+Rel(OrderService, AnalyticsService, "Отправка данных для аналитики")
+
+@enduml

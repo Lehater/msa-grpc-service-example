@@ -1,0 +1,65 @@
+@startuml
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity "User" as user {
+  *user_id : String <<generated>>
+  --
+  *name : String
+  email : String
+  role : String
+}
+
+entity "Home" as home {
+  *home_id : String <<generated>>
+  --
+  *user_id : String <<FK>>
+  address : String
+  name : String
+}
+
+entity "Device" as device {
+  *device_id : String <<generated>>
+  --
+  *home_id : String <<FK>>
+  device_type_id : String <<FK>>
+  model : String
+  status : String
+  parameters : String
+}
+
+entity "DeviceType" as devicetype {
+  *device_type_id : String <<generated>>
+  --
+  type_name : String
+  supported_parameters : String
+}
+
+entity "Module" as module {
+  *module_id : String <<generated>>
+  --
+  *device_id : String <<FK>>
+  name : String
+  description : String
+}
+
+entity "Telemetry" as telemetry {
+  *telemetry_id : String <<generated>>
+  --
+  *device_id : String <<FK>>
+  timestamp : Date
+  value : String
+}
+
+'user and home relationship
+user ||..o{ home
+home ||..o{ device
+
+'device relationships
+device ||..o{ telemetry
+devicetype ||..o{ device
+
+module ||..o{ device
+
+@enduml
