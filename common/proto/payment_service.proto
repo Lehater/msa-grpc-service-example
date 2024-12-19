@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package paymentservice;
+
+// Сервис для обработки платежей
+service PaymentService {
+  // Обработка платежа
+  rpc ProcessPayment(ProcessPaymentRequest) returns (ProcessPaymentResponse);
+}
+
+// Сообщения для PaymentService
+message ProcessPaymentRequest {
+  string order_id = 1;                 // ID заказа
+  double amount = 2;                    // Сумма платежа
+}
+
+message ProcessPaymentResponse {
+  string transaction_id = 1;           // ID транзакции
+  string status = 2;                   // Статус транзакции (SUCCESS, FAILED)
+}

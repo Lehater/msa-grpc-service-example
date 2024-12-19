@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package orderservice;
+
+// Сервис для работы с заказами
+service OrderService {
+    // Создание нового заказа
+    rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
+}
+
+// Сообщения для OrderService
+message CreateOrderRequest {
+    string user_id = 1;                  // ID пользователя
+    repeated OrderItem items = 2;        // Список товаров
+}
+
+message CreateOrderResponse {
+    string order_id = 1;                 // ID созданного заказа
+    string status = 2;                   // Статус заказа
+}
+
+// Описание товара в заказе
+message OrderItem {
+    string product_id = 1;               // ID товара
+    int32 quantity = 2;                  // Количество
+    float price = 3;                     // Цена за единицу товара
+}

@@ -1,0 +1,45 @@
+@startuml
+
+!pragma teoz true
+title Sequence Diagram: "Order Creation and Payment Processing"
+
+actor User as Customer
+
+box "Order Service" #LightBlue
+  box "Interface Layer"
+    participant OrderController
+  end box
+  box "Application Layer"
+    participant CreateOrderUseCase
+  end box
+  box "Infrastructure Layer"
+    participant PaymentServiceClient
+  end box
+end box
+
+box "Payment Service" #LightGreen
+  box "Infrastructure Layer"
+    participant PaymentServiceGrpc
+  end box
+  box "Application Layer"
+    participant ProcessPaymentUseCase
+  end box
+  box "Domain Layer"
+    participant Transaction
+  end box
+end box
+
+Customer -> OrderController: HTTP POST /createOrder
+OrderController -> CreateOrderUseCase: execute(userId, items)
+CreateOrderUseCase -> PaymentServiceClient: processPayment(orderId, totalPrice) [gRPC]
+PaymentServiceClient -> PaymentServiceGrpc: gRPC call: processPayment
+PaymentServiceGrpc -> ProcessPaymentUseCase: execute(orderId, amount)
+ProcessPaymentUseCase -> Transaction: Create transaction (SUCCESS/FAILED)
+ProcessPaymentUseCase --> PaymentServiceGrpc: Return ProcessPaymentResponse
+PaymentServiceGrpc --> PaymentServiceClient: Return SUCCESS/FAILED
+PaymentServiceClient --> CreateOrderUseCase: Return true/false
+CreateOrderUseCase -> CreateOrderUseCase: Update status CONFIRMED/CANCELLED
+CreateOrderUseCase --> OrderController: Return OrderDTO
+OrderController --> Customer: HTTP Response (orderId, status)
+
+@enduml

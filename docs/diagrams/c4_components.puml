@@ -1,0 +1,23 @@
+@startuml
+!include <C4/C4_Component>
+
+title Диаграмма компонентов: "Сервис заказов и Сервис платежей с использованием gRPC"
+
+Person(Customer, "Покупатель", "Инициирует заказы и платежи")
+Boundary(order_service, "Сервис заказов") {
+    Component(OrderController, "Контроллер заказов", "Обрабатывает HTTP-запросы для заказов")
+    Component(CreateOrderUseCase, "Сценарий создания заказа", "Создает новые заказы")
+    Component(PaymentServiceClient, "Клиент сервиса платежей (gRPC)", "Отправляет запросы на платежи через gRPC")
+}
+
+Boundary(payment_service, "Сервис платежей") {
+    Component(PaymentServiceGrpc, "Сервис платежей gRPC", "Обрабатывает gRPC-запросы на платежи")
+}
+
+Rel(Customer, OrderController, "Создает заказы, просматривает статус", "HTTP")
+Rel(OrderController, CreateOrderUseCase, "Обрабатывает создание заказа")
+Rel(CreateOrderUseCase, PaymentServiceClient, "Инициирует платеж", "gRPC")
+
+Rel(PaymentServiceClient, PaymentServiceGrpc, "Отправляет запросы на платежи", "gRPC")
+
+@enduml
