@@ -3,19 +3,23 @@ package orderservice.infrastructure.config;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AppConfig {
+    private static final Logger logger = LoggerFactory.getLogger(AppConfig.class);
     private final Properties properties = new Properties();
 
     public AppConfig(String configFileName) {
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(configFileName)) {
             if (inputStream != null) {
                 properties.load(inputStream);
+                logger.info("Configuration file {} loaded.", configFileName);
             } else {
-                System.out.println("Configuration file " + configFileName + " not found. Using environment variables " +
-                        "only.");
+                logger.info("Configuration file {} not found. Using environment variables only.", configFileName);
             }
         } catch (IOException e) {
+            logger.error("Error loading configuration file: {}", configFileName);
             throw new RuntimeException("Error loading configuration file: " + configFileName, e);
         }
     }
@@ -26,12 +30,14 @@ public class AppConfig {
         if (envValue != null) {
             return envValue;
         }
+
         // Проверяем файл
         String fileValue = properties.getProperty(key);
         if (fileValue != null) {
             return fileValue;
         }
         if (required) {
+            logger.error("Missing required configuration key: {}", key);
             throw new IllegalArgumentException("Missing required configuration key: " + key);
         }
         return null;
