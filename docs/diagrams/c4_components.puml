@@ -14,10 +14,9 @@ Boundary(payment_service, "Сервис платежей") {
     Component(PaymentServiceGrpc, "Сервис платежей gRPC", "Обрабатывает gRPC-запросы на платежи")
 }
 
-Rel(Customer, OrderController, "Создает заказы, просматривает статус", "HTTP")
+Rel(Customer, OrderController, "POST /orders, GET /orders/{id}", "HTTP")
 Rel(OrderController, CreateOrderUseCase, "Обрабатывает создание заказа")
 Rel(CreateOrderUseCase, PaymentServiceClient, "Инициирует платеж", "gRPC")
-
 Rel(PaymentServiceClient, PaymentServiceGrpc, "Отправляет запросы на платежи", "gRPC")
-
+Rel(PaymentServiceGrpc, PaymentServiceClient, "Возвращает результат платежа (SUCCESS/FAILED)", "gRPC")
 @enduml

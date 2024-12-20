@@ -16,40 +16,13 @@
 
 ### Список ключевых функций системы
 
-1. **Управление пользователями:**
-    - Регистрация и аутентификация пользователей.
-    - Управление профилем пользователя.
-    - Авторизация для выполнения действий в системе.
-
-2. **Управление каталогом товаров:**
-    - Хранение данных о товарах.
-    - Поиск и фильтрация товаров.
-    - Обновление информации о товарах.
-
-3. **Обработка заказов:**
-    - Создание и управление заказами.
-    - Проверка наличия товаров в заказе.
-    - Резервирование товаров на складе.
-    - Отслеживание статуса заказов.
-
-4. **Обработка платежей:**
-    - Проведение платежей через платёжные шлюзы.
-    - Проверка статуса транзакций.
-    - Управление возвратами и отказами.
-
-5. **Управление запасами:**
-    - Мониторинг остатков товаров на складе.
-    - Обновление данных о наличии товаров.
-    - Интеграция с поставщиками для пополнения запасов.
-
-6. **Уведомления:**
-    - Отправка уведомлений пользователям о статусах заказов.
-    - Внутренние уведомления для сервисов.
-
-7. **Аналитика:**
-    - Сбор и хранение данных о продажах и действиях пользователей.
-    - Формирование отчётов.
-    - Передача данных в аналитические платформы.
+1. Управление пользователями
+2. Управление каталогом товаров
+3. Обработка заказов
+4. Обработка платежей
+5. Управление запасами
+6. Уведомления
+7. Аналитика
 
 ### Независимые модули для каждой функции
 
@@ -80,59 +53,21 @@
 
 > - Создайте два микросервиса, которые решают определенную задачу, будь то управления платежами или обработки заказов.
 > - Каждый микросервис должен **имитировать** одну из следующих функциональностей.
-    >
-
-- Сервис обработки заказов: обрабатывает заказы от пользователей.
-
-> - Сервис управления платежами: отвечает за финансирование и транзакции.
-    >
-
-- Сервис отслеживания состояния: позволяет пользователям отслеживать состояние своих заказов.
-
-> - Сервис отзывов: позволяет пользователям оставлять и читать отзывы.
-> - Убедитесь, что микросервисы минимально зависят друг от друга.
+>   - Сервис обработки заказов: обрабатывает заказы от пользователей.
+>   - Сервис управления платежами: отвечает за финансирование и транзакции.
+>   - Сервис отслеживания состояния: позволяет пользователям отслеживать состояние своих заказов.
+>   - Сервис отзывов: позволяет пользователям оставлять и читать отзывы.
+>   - Убедитесь, что микросервисы минимально зависят друг от друга.
 
 ### Микросервисы системы
 
-1. **Микросервис управления пользователями (User Service):**
-    - Регистрация пользователей.
-    - Аутентификация и авторизация.
-    - Управление профилем пользователя.
-
-2. **Микросервис управления каталогом (Catalog Service):**
-    - Хранение данных о товарах.
-    - Обновление информации о товарах.
-    - Поиск и фильтрация товаров.
-
-3. **Микросервис обработки заказов (Order Service):**
-    - Создание и управление заказами.
-    - Проверка наличия товаров.
-    - Резервирование товаров на складе.
-    - Отслеживание статуса заказов.
-
-4. **Микросервис обработки платежей (Payment Service):**
-    - Проведение платежей через платёжные шлюзы.
-    - Проверка и подтверждение транзакций.
-    - Управление возвратами и отказами.
-
-5. **Микросервис управления запасами (Inventory Service):**
-    - Мониторинг остатков товаров.
-    - Резервирование товаров на складе.
-    - Интеграция с поставщиками для пополнения запасов.
-
-6. **Микросервис уведомлений (Notification Service):**
-    - Отправка уведомлений пользователям (email/SMS).
-    - Внутренние уведомления между сервисами.
-
-7. **Микросервис аналитики (Analytics Service):**
-    - Сбор данных о заказах, продажах и пользователях.
-    - Формирование аналитических отчётов.
-    - Передача данных в аналитические платформы.
-
-8. **API Gateway:**
-    - Единая точка входа для всех запросов.
-    - Маршрутизация запросов между микросервисами.
-    - Обеспечение безопасности через проверку токенов.
+1. Микросервис управления пользователями (User Service)
+2. Микросервис управления каталогом (Catalog Service)
+3. Микросервис обработки заказов (Order Service)
+4. Микросервис обработки платежей (Payment Service)
+5. Микросервис управления запасами (Inventory Service)
+6. Микросервис уведомлений (Notification Service)
+7. Микросервис аналитики (Analytics Service)
 
 Каждый из микросервисов будет автономным, со своими собственными базами данных и интерфейсами, что обеспечит минимальную
 связанность.
@@ -143,14 +78,19 @@
 
 - **Микросервис обработки заказов (Order Service):**
     - Создание и управление заказами.
-    - Проверка наличия товаров.
-    - Резервирование товаров на складе.
     - Отслеживание статуса заказов.
 
 - **Микросервис обработки платежей (Payment Service):**
     - Проведение платежей через платёжные шлюзы.
     - Проверка и подтверждение транзакций.
-    - Управление возвратами и отказами.
+
+
+диаграмма компонентов С4 (выбранные микросервисы)
+![c4_diagram](diagrams/c4_components_order_payment.png)
+
+диаграмма последовательности взаимодействия сервисов по протоколу gRPC 
+![sequence diagram](diagrams/grpc_sequence_diagram.png)
+
 
 ---
 
@@ -159,7 +99,7 @@
 > - Создайте файлы .proto для каждого сервиса
 > - Определите gRPC методы для каждого сервиса, включая запросы и ответы.
 > - Используйте сериализацию данных в формате Protocol Buffers.
-
+ 
 ### Определение интерфейсов взаимодействия для gRPC
 
 ### 1. **Файл `.proto` для Order Service**
@@ -169,55 +109,32 @@
 ```proto
 syntax = "proto3";
 
-package order;
+package orderservice;
 
+// Сервис для работы с заказами
 service OrderService {
-  // Создание нового заказа
-  rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
-  
-  // Получение информации о заказе
-  rpc GetOrder(GetOrderRequest) returns (GetOrderResponse);
-  
-  // Обновление статуса заказа
-  rpc UpdateOrderStatus(UpdateOrderStatusRequest) returns (UpdateOrderStatusResponse);
+    // Создание нового заказа
+    rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
 }
 
+// Сообщения для OrderService
 message CreateOrderRequest {
-  string user_id = 1; // ID пользователя
-  repeated OrderItem items = 2; // Список товаров
+    string user_id = 1;                  // ID пользователя
+    repeated OrderItem items = 2;        // Список товаров
 }
 
 message CreateOrderResponse {
-  string order_id = 1; // ID созданного заказа
-  string status = 2; // Статус заказа
+    string order_id = 1;                 // ID созданного заказа
+    string status = 2;                   // Статус заказа
 }
 
-message GetOrderRequest {
-  string order_id = 1; // ID заказа
-}
-
-message GetOrderResponse {
-  string order_id = 1;
-  string user_id = 2;
-  repeated OrderItem items = 3;
-  string status = 4;
-}
-
-message UpdateOrderStatusRequest {
-  string order_id = 1; // ID заказа
-  string new_status = 2; // Новый статус заказа
-}
-
-message UpdateOrderStatusResponse {
-  string order_id = 1;
-  string updated_status = 2; // Обновлённый статус заказа
-}
-
+// Описание товара в заказе
 message OrderItem {
-  string product_id = 1; // ID товара
-  int32 quantity = 2; // Количество
-  float price = 3; // Цена за единицу
+    string product_id = 1;               // ID товара
+    int32 quantity = 2;                  // Количество
+    float price = 3;                     // Цена за единицу товара
 }
+
 ```
 
 ### 2. **Файл `.proto` для Payment Service**
@@ -227,55 +144,26 @@ message OrderItem {
 ```proto
 syntax = "proto3";
 
-package payment;
+package paymentservice;
 
+// Сервис для обработки платежей
 service PaymentService {
-  // Проведение платежа
+  // Обработка платежа
   rpc ProcessPayment(ProcessPaymentRequest) returns (ProcessPaymentResponse);
-
-  // Проверка статуса транзакции
-  rpc GetTransactionStatus(GetTransactionStatusRequest) returns (GetTransactionStatusResponse);
 }
 
+// Сообщения для PaymentService
 message ProcessPaymentRequest {
-  string order_id = 1; // ID заказа
-  float amount = 2; // Сумма платежа
-  string payment_method = 3; // Метод оплаты (например, "credit_card")
+  string order_id = 1;                 // ID заказа
+  double amount = 2;                    // Сумма платежа
 }
 
 message ProcessPaymentResponse {
-  string transaction_id = 1; // ID транзакции
-  string status = 2; // Статус транзакции (например, "SUCCESS", "FAILED")
+  string transaction_id = 1;           // ID транзакции
+  string status = 2;                   // Статус транзакции (SUCCESS, FAILED)
 }
 
-message GetTransactionStatusRequest {
-  string transaction_id = 1; // ID транзакции
-}
-
-message GetTransactionStatusResponse {
-  string transaction_id = 1; // ID транзакции
-  string status = 2; // Текущий статус (например, "PENDING", "SUCCESS")
-  string reason = 3; // Причина отказа (если применимо)
-}
 ```
-
-### **Пояснения:**
-
-1. **Формат данных:**
-    - **Protocol Buffers** для сериализации данных.
-
-2. **gRPC методы:**
-    - **Order Service:**
-        - `CreateOrder` — для создания нового заказа.
-        - `GetOrder` — для получения данных о заказе.
-        - `UpdateOrderStatus` — для обновления статуса заказа.
-    - **Payment Service:**
-        - `ProcessPayment` — для проведения платежа.
-        - `GetTransactionStatus` — для получения информации о статусе транзакции.
-
-3. **Взаимодействие между сервисами:**
-    - Order Service вызывает `ProcessPayment` из Payment Service для проведения платежа.
-    - Payment Service уведомляет Order Service о результатах транзакции (например, через событие или синхронный ответ).
 
 ---
 
@@ -284,12 +172,122 @@ message GetTransactionStatusResponse {
 > - Создайте Dockerfile для каждого микросервиса, указывая необходимые зависимости.
 > - Напишите файл docker-compose.yml для развертывания всех сервисов вместе, включая их зависимости и конфигурации
 
+Order Service Dockerfile:
+```dockerfile
+FROM eclipse-temurin:17-jdk
+
+WORKDIR /app
+
+# Копируем файл сборки JAR в контейнер
+COPY target/grpc-order-service*.jar order-service.jar
+
+# запуск JAR
+CMD ["java", "-jar", "order-service.jar"]
+```
+Payment Service Dockerfile:
+```dockerfile
+FROM eclipse-temurin:17-jdk
+
+WORKDIR /app
+
+# Копируем файл сборки JAR в контейнер
+COPY target/grpc-payment-service*.jar payment-service.jar
+
+# запуск JAR
+CMD ["java", "-jar", "payment-service.jar"]
+
+```
+docker-compose.yml
+```yaml
+version: '3.8'
+
+services:
+  order-service:
+    build:
+      context: ./order-service
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - PAYMENT_SERVICE_HOST=payment-service
+      - PAYMENT_SERVICE_PORT=9090
+    depends_on:
+      - payment-service
+    networks:
+      - app-network
+
+  payment-service:
+    build:
+      context: ./payment-service
+      dockerfile: Dockerfile
+    ports:
+      - "9090:9090"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+
+```
+
 ---
 
 ## 6. Развертывание и тестирование:
 
 > - Используйте Postman или gRPC client для тестирования взаимодействия между сервисами
+### Тестирование Order Service
+Метод CreateOrder
 
+Запрос:
+```json
+{
+  "user_id": "user123",
+  "items": [
+    {
+      "product_id": "p1",
+      "quantity": 2,
+      "price": 10.5
+    },
+    {
+      "product_id": "p2",
+      "quantity": 1,
+      "price": 5.0
+    }
+  ]
+}
+
+```
+Ожидаемый результат:
+```json
+{
+  "order_id": "2c2551a2-7eeb-4df8-a741-1de113995532",
+  "status": "CONFIRMED"
+}
+```
+
+<img src="diagrams/CreateOrder_request.png" width="80%" height="80%"/>
+
+### Тестирование Payment Service
+метод ProcessPayment
+
+Запрос:
+```json
+{
+    "transactionId": "txn123",
+    "amount": 100.50,
+    "orderId": "12345"
+}
+```
+Ожидаемый результат:
+```json
+{
+  "transaction_id": "cb64e2da-bd55-4adf-8bf1-1eab054de864",
+  "status": "SUCCESS"
+}
+```
+<img src="diagrams/PaymentService_request.png" width="80%" height="80%"/>
 ---
 
 ### Ожидаемый результат
@@ -297,3 +295,9 @@ message GetTransactionStatusResponse {
 > - Развернутая система: все микросервисы развернуты и работают в Docker-контейнерах.
 > - Тестовое взаимодействие: успешные тесты на gRPC вызовы между сервисами.
 > - Отчет с полным описанием шагов выполнения, приложенными диаграммами и описанием каждого микросервиса в формате PDF.
+
+<img src="diagrams/docker_ps_-a.png" width="100%" height="100%"/>
+
+[репозиторий на GitHub](https://github.com/Lehater/msa-grpc-service-example)
+
+
