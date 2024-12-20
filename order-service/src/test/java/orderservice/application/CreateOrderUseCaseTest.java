@@ -12,7 +12,7 @@ import static org.mockito.Mockito.*;
 public class CreateOrderUseCaseTest {
 
     @Test
-    public void testCreateOrderSuccess() {
+    void createOrderSuccess() {
         // Мокирование PaymentServiceClient
         PaymentServiceClient paymentServiceClient = mock(PaymentServiceClient.class);
         when(paymentServiceClient.processPayment(anyString(), anyDouble())).thenReturn(true);
@@ -35,7 +35,7 @@ public class CreateOrderUseCaseTest {
     }
 
     @Test
-    public void testCreateOrderFailure() {
+    void createOrderFailure() {
         // Мокирование PaymentServiceClient
         PaymentServiceClient paymentServiceClient = mock(PaymentServiceClient.class);
         when(paymentServiceClient.processPayment(anyString(), anyDouble())).thenReturn(false);

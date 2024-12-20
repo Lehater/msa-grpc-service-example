@@ -4,14 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.edu</groupId>
-    <artifactId>msa-grpc-service-example</artifactId>
+    <groupId>com.edu.training</groupId>
+    <artifactId>msa-grpc-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
+
     <packaging>pom</packaging>
+
     <modules>
         <!-- Список модулей -->
         <module>order-service</module>
         <module>payment-service</module>
+        <module>common-proto</module>
     </modules>
 
     <properties>
@@ -21,8 +24,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <os.detected.classifier>linux-x86_64</os.detected.classifier>
 
-        <project.basedir>../../</project.basedir>
-        <grpc.version>1.69.0</grpc.version><!-- CURRENT_GRPC_VERSION -->
+        <grpc.version>1.69.0</grpc.version>
         <protobuf.version>3.25.5</protobuf.version>
         <protoc.version>3.25.5</protoc.version>
     </properties>
@@ -53,20 +55,39 @@
                 <artifactId>slf4j-api</artifactId>
                 <version>1.7.36</version>
             </dependency>
-            <!-- JUnit для тестирования -->
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter</artifactId>
-                <version>5.9.1</version>
-                <scope>test</scope>
-            </dependency>
+
 
             <dependency>
                 <groupId>javax.annotation</groupId>
                 <artifactId>javax.annotation-api</artifactId>
-                <version>1.3.2</version> <!-- Последняя стабильная версия -->
+                <version>1.3.2</version>
                 <scope>provided</scope>
             </dependency>
+
+            <!-- Зависимость для Mockito -->
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>5.5.0</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- Интеграция Mockito с JUnit 5 -->
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-junit-jupiter</artifactId>
+                <version>5.5.0</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- Зависимость для JUnit 5 -->
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>5.10.0</version> <!-- Укажите актуальную версию -->
+                <scope>test</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -93,10 +114,6 @@
                     <pluginId>grpc-java</pluginId>
                     <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}
                     </pluginArtifact>
-
-                    <!-- Путь к общей папке с .proto файлами -->
-                    <protoSourceRoot>${project.parent.basedir}/common/proto</protoSourceRoot>
-
                 </configuration>
 
                 <executions>

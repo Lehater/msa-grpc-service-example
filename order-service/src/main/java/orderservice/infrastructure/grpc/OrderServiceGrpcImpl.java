@@ -1,16 +1,17 @@
 package orderservice.infrastructure.grpc;
 
 import io.grpc.stub.StreamObserver;
+import orderservice.OrderServiceGrpc.*;
+import orderservice.OrderServiceOuterClass.*;
 import orderservice.application.CreateOrderUseCase;
 import orderservice.domain.Order;
 import orderservice.domain.OrderItem;
-import orderservice.OrderServiceGrpc;
-import orderservice.OrderServiceOuterClass.*;
+
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class OrderServiceGrpcImpl extends OrderServiceGrpc.OrderServiceImplBase {
+public class OrderServiceGrpcImpl extends OrderServiceImplBase {
     private final CreateOrderUseCase createOrderUseCase;
 
     public OrderServiceGrpcImpl(CreateOrderUseCase createOrderUseCase) {
@@ -18,7 +19,8 @@ public class OrderServiceGrpcImpl extends OrderServiceGrpc.OrderServiceImplBase 
     }
 
     @Override
-    public void createOrder(CreateOrderRequest request, StreamObserver<CreateOrderResponse> responseObserver) {
+    public void createOrder(CreateOrderRequest request,
+                            StreamObserver<CreateOrderResponse> responseObserver) {
         try {
             // Преобразование gRPC-запроса в доменные объекты
             List<OrderItem> items = request.getItemsList().stream()

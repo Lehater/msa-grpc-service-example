@@ -4,16 +4,24 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.edu</groupId>
-        <artifactId>msa-grpc-service-example</artifactId>
+        <groupId>com.edu.training</groupId>
+        <artifactId>msa-grpc-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath> <!-- Путь к родительскому pom.xml -->
     </parent>
 
-    <artifactId>order-service</artifactId>
+    <groupId>com.edu.training.order</groupId>
+    <artifactId>grpc-order-service</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
+        <!-- Общие классы Protobuf -->
+        <dependency>
+            <groupId>com.edu.training</groupId>
+            <artifactId>common-proto</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <!-- Общие зависимости -->
         <dependency>
             <groupId>io.grpc</groupId>
@@ -47,6 +55,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Подключение зависимостей из родительского POM -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -54,6 +69,18 @@
             <plugin>
                 <groupId>org.xolstice.maven.plugins</groupId>
                 <artifactId>protobuf-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>orderservice.OrderServiceApplication</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
             </plugin>
         </plugins>
     </build>
